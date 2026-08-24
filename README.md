@@ -153,3 +153,57 @@ Now, suppose we add a CEO's salary of \$1,000k (outlier):
 
 > [!WARNING]
 > The mean has jumped to \$208.3k, which does not accurately represent what the typical employee or CEO earns. In datasets with significant outliers or skewed distributions, the **Median** is often a better measure of central tendency.
+
+---
+
+## 9. What is Median?
+The **Median** is the middle value in a sorted, ordered list of numbers. Unlike the mean, which is an average of all values, the median is a position-based measure that divides the dataset into two equal halves (50% of the values are below the median, and 50% are above it).
+
+> [!IMPORTANT]
+> To find the median, you **must first sort the dataset** in ascending (or descending) order.
+
+### A. Odd Number of Values
+If the dataset has an odd number of data points ($n$), the median is the exact middle value.
+*   **Formula:** $\text{Median} = \text{Value at position } \left(\frac{n + 1}{2}\right)$
+*   **Example:** For sorted dataset $[12, 15, 22, 30, 45]$ (where $n=5$):
+    *   $\text{Position} = \frac{5 + 1}{2} = 3^{\text{rd}}\text{ position}$
+    *   $\text{Median} = 22$
+
+### B. Even Number of Values
+If the dataset has an even number of data points ($n$), there is no single middle value. The median is the average (mean) of the two middle values.
+*   **Formula:** $\text{Median} = \frac{\text{Value at position } \left(\frac{n}{2}\right) + \text{Value at position } \left(\frac{n}{2} + 1\right)}{2}$
+*   **Example:** For sorted dataset $[10, 15, 20, 25, 30, 35]$ (where $n=6$):
+    *   Middle positions are $3^{\text{rd}}$ and $4^{\text{th}}$ (values $20$ and $25$).
+    *   $\text{Median} = \frac{20 + 25}{2} = 22.5$
+
+---
+
+## 10. Very Important: Median and Mean are Different
+While both the Mean and the Median are measures of central tendency, they differ significantly in how they respond to data distribution:
+
+1.  **Sensitivity to Outliers:**
+    *   **Mean:** Extremely sensitive to outliers.
+    *   **Median:** Robust/resistant to outliers because it only depends on the position, not the values of all elements.
+2.  **Use Cases:**
+    *   Use **Mean** for symmetric distributions without extreme outliers (e.g., height, test scores).
+    *   Use **Median** for highly skewed distributions or datasets containing extreme outliers (e.g., household income, real estate prices).
+
+---
+
+## 11. Median with Python Using NumPy
+We can easily calculate the median using Python's standard `statistics` module or NumPy.
+
+```python
+import numpy as np
+import statistics
+
+data = [30, 10, 15, 20, 35, 25]  # Unsorted data
+
+# Using NumPy (automatically handles sorting internally)
+median_np = np.median(data)
+print(f"Median (NumPy): {median_np}")
+
+# Using Python's built-in statistics module
+median_builtin = statistics.median(data)
+print(f"Median (Built-in): {median_builtin}")
+```
