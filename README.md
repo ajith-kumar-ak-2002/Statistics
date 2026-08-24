@@ -218,3 +218,54 @@ The **Mode** is the value that appears most frequently in a dataset. Unlike the 
     *   **Mode** = $23$
 
 ---
+
+## 13. Types of Mode Distributions & No Mode
+
+Depending on the frequencies of the values, a dataset can have one mode, multiple modes, or no mode at all:
+
+### A. Number of Modes:
+*   **Unimodal (One mode):** The dataset has exactly one value with the highest frequency.
+    *   *Example:* $[4, 5, 5, 6, 7] \rightarrow \text{Mode} = 5$
+*   **Bimodal (Two modes):** The dataset has two values that share the highest frequency.
+    *   *Example:* $[1, 2, 2, 3, 4, 4, 5] \rightarrow \text{Modes} = 2 \text{ and } 4$
+*   **Multimodal (More than two modes):** The dataset has three or more values that share the highest frequency.
+    *   *Example:* $[10, 10, 11, 12, 12, 13, 14, 14] \rightarrow \text{Modes} = 10, 12, \text{ and } 14$
+
+### B. No Mode:
+If all values in a dataset appear with the same frequency, the dataset is considered to have **no mode**.
+*   *Example:* $[1, 2, 3, 4, 5]$ (every number appears exactly once) $\rightarrow \text{No Mode}$
+
+---
+
+## 14. Mode with Python using Pandas
+While you can calculate the mode using Python's built-in `statistics` module, **Pandas** is the most common tool used in data science because it easily handles datasets with multiple modes or missing values.
+
+```python
+import pandas as pd
+
+# Creating a dataset (with two modes: 5 and 8)
+data = [5, 5, 2, 8, 8, 3, 1]
+
+df = pd.Series(data)
+
+# Calculate mode (returns a Series because there can be multiple modes)
+modes = df.mode()
+
+print("Modes found:")
+print(modes.to_list())  # Output: [5, 8]
+```
+
+---
+
+## 15. Mean vs. Median vs. Mode (Summary)
+
+Choosing the right measure of central tendency depends on the data type and distribution shape:
+
+| Feature/Measure | Mean | Median | Mode |
+| :--- | :--- | :--- | :--- |
+| **Best For** | Symmetric, numerical data without outliers (e.g., test scores, heights). | Skewed, numerical data or datasets with outliers (e.g., salaries). | Categorical data or finding the most common class/value. |
+| **Outlier Sensitivity** | **High** (Very sensitive) | **None** (Highly robust) | **None** (Highly robust) |
+| **Number of values** | Always unique (1) | Always unique (1) | Can have multiple (None, 1, or more) |
+| **Categorical Data?** | No | No | **Yes** |
+
+---
