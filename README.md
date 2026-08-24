@@ -12,3 +12,16 @@ It is generally divided into two main branches:
 *   **Inferential Statistics:** Drawing conclusions or making predictions about a larger population based on a sample of data.
 
 ---
+
+## 2. Population vs. Sample
+
+Understanding the difference between a population and a sample is fundamental to statistical analysis:
+
+| Aspect | Population | Sample |
+| :--- | :--- | :--- |
+| **Definition** | The complete set of all items or individuals of interest. | A subset of the population selected for study. |
+| **Characteristics** | Called **Parameters** (e.g., Population mean: $\mu$). | Called **Statistics** (e.g., Sample mean: $\bar{x}$). |
+| **Size** | Represented by $N$ (usually large or infinite). | Represented by $n$ (smaller, manageable size). |
+| **Example** | All citizens of a country. | 1,000 citizens surveyed for an election poll. |
+
+---
