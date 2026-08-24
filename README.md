@@ -207,3 +207,14 @@ print(f"Median (NumPy): {median_np}")
 median_builtin = statistics.median(data)
 print(f"Median (Built-in): {median_builtin}")
 ```
+
+---
+
+## 12. What is Mode?
+The **Mode** is the value that appears most frequently in a dataset. Unlike the mean and median, the mode can be calculated for both numerical (quantitative) and categorical (qualitative) data.
+
+*   **Example:** In the dataset $[3, 7, 5, 13, 20, 23, 39, 23, 40, 23, 14, 12, 56, 23, 29]$:
+    *   The value `23` appears 4 times, which is more than any other value.
+    *   **Mode** = $23$
+
+---
