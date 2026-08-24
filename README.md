@@ -269,3 +269,10 @@ Choosing the right measure of central tendency depends on the data type and dist
 | **Categorical Data?** | No | No | **Yes** |
 
 ---
+
+## 16. AI/ML Connection for Mode
+Just like mean and median, the mode plays a crucial role in machine learning:
+
+1.  **Categorical Data Imputation:** When preprocessing a dataset with missing values in categorical columns (e.g., "City", "Gender", "Product Type"), we impute (fill in) the missing entries using the **Mode** of that column.
+2.  **Classification Algorithms:** Many classification models work by voting. For example, in **K-Nearest Neighbors (KNN)** classification, the algorithm finds the $k$ nearest neighbors to a query point and assigns the class label by taking the **Mode** of those neighbors' classes.
+3.  **Ensemble Methods (Majority Voting):** In ensemble learning (like combining multiple distinct models), the final prediction is often decided by taking the **Mode** (majority vote) of all individual model predictions.
