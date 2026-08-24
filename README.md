@@ -107,3 +107,49 @@ For a dataset of test scores: $[85, 90, 75, 95, 80]$
 *   Mean = $425 / 5 = 85$
 
 ---
+
+## 6. Mean using Python
+We can calculate the mean in Python using standard libraries or third-party libraries like `numpy` or `pandas`.
+
+```python
+# 1. Using Python's built-in statistics module
+import statistics
+
+data = [85, 90, 75, 95, 80]
+mean_val = statistics.mean(data)
+print(f"Mean (built-in): {mean_val}")
+
+# 2. Using NumPy
+import numpy as np
+
+mean_np = np.mean(data)
+print(f"Mean (NumPy): {mean_np}")
+```
+
+---
+
+## 7. Why Mean is Important in AI/ML
+The mean is a foundational building block for many machine learning algorithms and preprocessing techniques:
+
+1.  **Data Imputation (Handling Missing Values):** One common way to fill in missing numerical values in a dataset is to replace them with the mean of that feature/column.
+2.  **Feature Scaling (Normalization & Standardization):** 
+    *   In **Standardization (Z-score normalization)**, we center data around a mean of 0: $Z = \frac{x - \mu}{\sigma}$.
+3.  **Evaluation Metrics:** Metrics like **Mean Squared Error (MSE)** and **Mean Absolute Error (MAE)** rely on averages to calculate error rates.
+4.  **Centroid-based Clustering:** In algorithms like **K-Means**, cluster centers (centroids) are calculated as the mean position of all data points in that cluster.
+5.  **Baseline Models:** A baseline model for regression tasks might simply predict the mean of the target variable for every input.
+
+---
+
+## 8. Important: Mean can be affected by Outliers
+While the mean is useful, it is highly sensitive to **outliers** (extreme values that are much larger or smaller than the rest of the dataset).
+
+### Example:
+Consider salaries of 5 employees: \$40k, \$45k, \$50k, \$55k, \$60k.
+*   **Mean Salary:** $(40 + 45 + 50 + 55 + 60) / 5 = \$50\text{k}$ (A good representation of the group).
+
+Now, suppose we add a CEO's salary of \$1,000k (outlier):
+*   **Dataset:** \$40k, \$45k, \$50k, \$55k, \$60k, \$1,000k.
+*   **New Mean Salary:** $(40 + 45 + 50 + 55 + 60 + 1000) / 6 \approx \$208.3\text{k}$
+
+> [!WARNING]
+> The mean has jumped to \$208.3k, which does not accurately represent what the typical employee or CEO earns. In datasets with significant outliers or skewed distributions, the **Median** is often a better measure of central tendency.
