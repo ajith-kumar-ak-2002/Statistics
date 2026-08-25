@@ -298,3 +298,11 @@ For the dataset of daily temperatures (in °C): $[15, 22, 18, 30, 25]$
 *   **Quality Control:** In manufacturing, range is used in control charts (like R-charts) to monitor whether process variability is staying within acceptable bounds.
 
 ---
+
+## 19. Limitations of Range
+While easy to compute, the Range has two major drawbacks:
+1.  **High Sensitivity to Outliers:** Since it only depends on the two extreme values (min and max), a single outlier will distort the range, rendering it unrepresentative of the rest of the dataset.
+    *   *Example:* If a dataset $[4, 5, 6, 5, 4]$ (Range = 2) gets an outlier $100$, the new dataset $[4, 5, 6, 5, 4, 100]$ has a Range of $96$.
+2.  **Ignores the Distribution:** The range doesn't tell us anything about how the data points are distributed between the minimum and maximum values. Two datasets could have the same range but completely different spreads in the middle.
+
+---
