@@ -376,3 +376,20 @@ There is a critical distinction in the denominator when calculating variance for
 | **Reasoning** | We have complete data, so we divide by the actual count. | Uses **Bessel's Correction** ($n-1$) to correct bias, making the sample variance a better estimator of the true population variance. |
 
 ---
+
+## 24. Variance with Python Using NumPy
+NumPy calculates population variance by default (denominator $N$). To compute sample variance, you must set the degrees of freedom parameter `ddof=1` (denominator $n-1$).
+
+```python
+import numpy as np
+
+data = [10, 12, 23, 23, 16, 23, 21, 16]
+
+# 1. Population Variance (divides by N)
+pop_var = np.var(data)
+print(f"Population Variance (N): {pop_var:.4f}")
+
+# 2. Sample Variance (divides by n - 1)
+sample_var = np.var(data, ddof=1)
+print(f"Sample Variance (n - 1): {sample_var:.4f}")
+```
