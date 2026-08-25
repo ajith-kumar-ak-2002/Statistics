@@ -365,3 +365,14 @@ By **squaring** the differences:
 2.  **Penalizes Outliers:** Squaring gives disproportionately more weight to points that lie far from the mean (e.g., a difference of $2$ becomes $4$, but a difference of $10$ becomes $100$).
 
 ---
+
+## 23. Population Variance vs. Sample Variance
+There is a critical distinction in the denominator when calculating variance for an entire population versus a sample:
+
+| Type | Population Variance ($\sigma^2$) | Sample Variance ($s^2$) |
+| :--- | :--- | :--- |
+| **Formula** | $\sigma^2 = \frac{\sum (X_i - \mu)^2}{N}$ | $s^2 = \frac{\sum (x_i - \bar{x})^2}{n - 1}$ |
+| **Denominator** | Divided by $N$ (Total population size). | Divided by $n - 1$ (Sample size minus 1). |
+| **Reasoning** | We have complete data, so we divide by the actual count. | Uses **Bessel's Correction** ($n-1$) to correct bias, making the sample variance a better estimator of the true population variance. |
+
+---
