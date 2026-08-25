@@ -323,3 +323,36 @@ print(f"Range (using np.ptp): {range_np}")
 range_manual = np.max(data) - np.min(data)
 print(f"Range (manual): {range_manual}")
 ```
+
+---
+
+## 21. What is Variance?
+**Variance** measures how far a set of numbers is spread out from their average (mean) value. It answers the question: *How much do all the values differ from the mean?*
+
+Unlike the range, which only uses the two extreme values, variance takes every single data point into account.
+
+### The Step-by-Step Process:
+
+```
+          Data
+           │
+           ▼
+     Calculate Mean
+           │
+           ▼
+Find difference from Mean
+           │
+           ▼
+ Square the differences
+           │
+           ▼
+        Add them
+           │
+           ▼
+Divide by number of values
+           │
+           ▼
+       Variance
+```
+
+---
