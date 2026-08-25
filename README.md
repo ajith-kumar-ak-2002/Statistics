@@ -356,3 +356,12 @@ Divide by number of values
 ```
 
 ---
+
+## 22. Why Square the Differences?
+When calculating variance, we subtract the mean from each data point ($x_i - \mu$). If we simply add these differences together without squaring them, the negative and positive values will cancel each other out, resulting in a sum of zero.
+
+By **squaring** the differences:
+1.  **Eliminates Negative Signs:** All differences become positive, allowing us to sum them up.
+2.  **Penalizes Outliers:** Squaring gives disproportionately more weight to points that lie far from the mean (e.g., a difference of $2$ becomes $4$, but a difference of $10$ becomes $100$).
+
+---
