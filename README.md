@@ -393,3 +393,12 @@ print(f"Population Variance (N): {pop_var:.4f}")
 sample_var = np.var(data, ddof=1)
 print(f"Sample Variance (n - 1): {sample_var:.4f}")
 ```
+
+## 25. Why Variance Matters in AI/ML
+Variance is a cornerstone concept across many areas of Machine Learning and Data Science:
+
+1.  **The Bias-Variance Tradeoff:** A fundamental model performance concept.
+    *   **High Variance:** The model is oversensitive to fluctuations in the training data (**overfitting**). It performs well on training data but poorly on unseen test data.
+2.  **Feature Selection (Variance Threshold):** Features with very low variance (e.g., a column where almost all values are identical) carry little information, so they are often dropped during preprocessing.
+3.  **Dimensionality Reduction (PCA):** Principal Component Analysis (PCA) works by projecting data onto directions of **maximum variance** to retain as much information as possible in fewer dimensions.
+4.  **Weight Initialization:** Deep learning models use variance metrics to scale initial weights (e.g., He or Xavier initialization) to prevent vanishing or exploding gradients.
