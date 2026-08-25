@@ -306,3 +306,20 @@ While easy to compute, the Range has two major drawbacks:
 2.  **Ignores the Distribution:** The range doesn't tell us anything about how the data points are distributed between the minimum and maximum values. Two datasets could have the same range but completely different spreads in the middle.
 
 ---
+
+## 20. Range with Python Using NumPy
+We can compute the range in Python using NumPy's `np.ptp()` function (which stands for "peak-to-peak") or by manually subtracting the minimum from the maximum.
+
+```python
+import numpy as np
+
+data = [15, 22, 18, 30, 25]
+
+# Method 1: Using NumPy's peak-to-peak (ptp) function
+range_np = np.ptp(data)
+print(f"Range (using np.ptp): {range_np}")
+
+# Method 2: Manually calculating using np.max and np.min
+range_manual = np.max(data) - np.min(data)
+print(f"Range (manual): {range_manual}")
+```
