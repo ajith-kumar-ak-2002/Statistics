@@ -292,3 +292,9 @@ For the dataset of daily temperatures (in °C): $[15, 22, 18, 30, 25]$
 *   $\text{Range} = 30 - 15 = 15\text{°C}$
 
 ---
+## 18. Why is Range Useful?
+*   **Simplicity:** It is extremely easy and quick to calculate.
+*   **Quick Overview:** It gives an immediate, rough idea of the spread or variability of the data. For example, comparing the temperature range of two cities helps quickly show which one has more volatile weather.
+*   **Quality Control:** In manufacturing, range is used in control charts (like R-charts) to monitor whether process variability is staying within acceptable bounds.
+
+---
