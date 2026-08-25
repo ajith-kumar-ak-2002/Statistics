@@ -292,6 +292,7 @@ For the dataset of daily temperatures (in °C): $[15, 22, 18, 30, 25]$
 *   $\text{Range} = 30 - 15 = 15\text{°C}$
 
 ---
+
 ## 18. Why is Range Useful?
 *   **Simplicity:** It is extremely easy and quick to calculate.
 *   **Quick Overview:** It gives an immediate, rough idea of the spread or variability of the data. For example, comparing the temperature range of two cities helps quickly show which one has more volatile weather.
@@ -393,6 +394,8 @@ print(f"Population Variance (N): {pop_var:.4f}")
 sample_var = np.var(data, ddof=1)
 print(f"Sample Variance (n - 1): {sample_var:.4f}")
 ```
+
+---
 
 ## 25. Why Variance Matters in AI/ML
 Variance is a cornerstone concept across many areas of Machine Learning and Data Science:
