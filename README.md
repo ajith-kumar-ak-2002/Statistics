@@ -531,3 +531,65 @@ print(f"90th Percentile (Linear): {p90_linear}")
 ```
 
 ---
+
+## 31. What are Quartiles?
+
+**Quartiles** are statistical values that divide a sorted dataset into **four equal parts**, with each part representing $25\%$ of the total data points.
+
+```
+                  Sorted Dataset (100% of Data)
+ ┌──────────────────┬──────────────────┬──────────────────┬──────────────────┐
+ │   First 25%      │   Second 25%     │    Third 25%     │    Fourth 25%    │
+ └──────────────────┴──────────────────┴──────────────────┴──────────────────┘
+ Min                Q1 (25th)          Q2 (50th)          Q3 (75th)         Max
+                                       (Median)
+```
+
+### The Three Quartiles:
+1.  **$Q_1$ (First Quartile / Lower Quartile):** 
+    *   Equal to the **$25^{\text{th}}$ Percentile**.
+    *   $25\%$ of data points lie below $Q_1$, and $75\%$ lie above it.
+2.  **$Q_2$ (Second Quartile / Median):** 
+    *   Equal to the **$50^{\text{th}}$ Percentile**.
+    *   Cuts the dataset exactly in half ($50\%$ below, $50\%$ above).
+3.  **$Q_3$ (Third Quartile / Upper Quartile):** 
+    *   Equal to the **$75^{\text{th}}$ Percentile**.
+    *   $75\%$ of data points lie below $Q_3$, and $25\%$ lie above it.
+
+### How to Calculate Quartiles Manually:
+1.  **Sort** the dataset in ascending order.
+2.  Find **$Q_2$ (Median)** to split the dataset into a lower half and an upper half.
+3.  Find the **median of the lower half** to get **$Q_1$**.
+4.  Find the **median of the upper half** to get **$Q_3$**.
+
+---
+
+## 32. The Interquartile Range (IQR)
+
+The **Interquartile Range (IQR)** is a measure of statistical dispersion (spread) that represents the range spanned by the middle $50\%$ of an ordered dataset.
+
+### Formula:
+$$\text{IQR} = Q_3 - Q_1$$
+
+Where:
+*   $Q_3$ = $75^{\text{th}}$ percentile (Upper Quartile)
+*   $Q_1$ = $25^{\text{th}}$ percentile (Lower Quartile)
+
+### Why is IQR "The Important Part"?
+Unlike the total **Range** ($X_{\text{max}} - X_{\text{min}}$), which relies entirely on the two extreme values and is destroyed by outliers, the **IQR ignores the top 25% and bottom 25% of extreme data points**. 
+
+> [!IMPORTANT]
+> The IQR provides a **robust measure of variability** that focuses strictly on the core bulk of the data, making it completely resistant to extreme outliers.
+
+### IQR and the Box Plot (Five-Number Summary)
+The IQR forms the foundation of the **Box Plot (Box-and-Whisker Plot)**, which visually summarizes data using 5 key numbers:
+
+```
+        Outlier                          Box                         Outlier
+           *       |───────────[  Q1  │  Q2  │  Q3  ]───────────|       *
+                   ▲           ▲      ▲      ▲      ▲           ▲
+              Lower Fence     Min     │    Median  Max     Upper Fence
+               (Q1-1.5*IQR)           └─  IQR  ─┘          (Q3+1.5*IQR)
+```
+
+---
