@@ -405,3 +405,29 @@ Variance is a cornerstone concept across many areas of Machine Learning and Data
 2.  **Feature Selection (Variance Threshold):** Features with very low variance (e.g., a column where almost all values are identical) carry little information, so they are often dropped during preprocessing.
 3.  **Dimensionality Reduction (PCA):** Principal Component Analysis (PCA) works by projecting data onto directions of **maximum variance** to retain as much information as possible in fewer dimensions.
 4.  **Weight Initialization:** Deep learning models use variance metrics to scale initial weights (e.g., He or Xavier initialization) to prevent vanishing or exploding gradients.
+
+---
+
+## 26. What is a Percentile?
+
+A **Percentile** is a statistical measure that indicates the relative standing of a value within a dataset. Specifically, the $p^{\text{th}}$ percentile is the value below which $p\%$ of the observations in the dataset fall.
+
+*   **Definition:** Position-based measure that divides an ordered dataset into 100 equal parts.
+*   **Key Idea:** It tells you how a specific data point compares to the rest of the group.
+
+### Formula for Rank / Position:
+To find the position ($k$) of the $p^{\text{th}}$ percentile in a sorted dataset of $n$ elements:
+
+$$k = 1 + \frac{p}{100} \times (n - 1)$$
+
+*(If $k$ is an integer, the percentile is the value at position $k$. If $k$ is not an integer, interpolation between adjacent values is performed.)*
+
+### Real-World Example:
+If you take a standardized test and score in the **$85^{\text{th}}$ percentile**:
+*   It does **NOT** mean you scored $85\%$ on the test.
+*   It means you scored **higher than or equal to $85\%$** of all students who took the test (and only $15\%$ scored higher than you).
+
+> [!NOTE]
+> Like the median, data **must be sorted in ascending order** before calculating percentiles.
+
+---
