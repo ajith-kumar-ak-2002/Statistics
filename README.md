@@ -431,3 +431,73 @@ If you take a standardized test and score in the **$85^{\text{th}}$ percentile**
 > Like the median, data **must be sorted in ascending order** before calculating percentiles.
 
 ---
+
+## 27. Percentile vs. Percentage
+
+It is common to confuse **Percentage** and **Percentile**, but they measure fundamentally different concepts:
+
+| Aspect | Percentage (%) | Percentile |
+| :--- | :--- | :--- |
+| **Definition** | A fraction or ratio expressed as a portion out of 100 ($\frac{\text{Score}}{\text{Total}} \times 100$). | A value indicating the percentage of scores that fall at or below it. |
+| **Measurement Type** | Absolute performance measure. | Relative rank / positional measure. |
+| **Dependency** | Independent of how others perform. | Fully dependent on the distribution of the entire dataset. |
+| **Range** | 0% to 100% (or higher in growth metrics). | 0th to 100th percentile. |
+| **Example** | Getting 40 out of 50 on a test is **80%**. | If 40/50 is higher than 90% of class scores, you are in the **90th percentile**. |
+
+---
+
+## 28. Important Percentiles
+
+While any percentile from 0 to 100 can be calculated, certain percentiles are particularly significant in statistics and data analysis:
+
+### A. The Quartiles
+Quartiles divide a sorted dataset into four equal parts, each containing 25% of the data:
+
+```
+    Min          Q1 (25th)       Q2 (50th)       Q3 (75th)          Max
+     │──────────────┼───────────────┼───────────────┼───────────────│
+     │   25% Data   │   25% Data    │   25% Data    │   25% Data    │
+```
+
+1.  **$25^{\text{th}}$ Percentile ($Q_1$ - First Quartile):** Marks the bottom 25% of data. 25% of values lie below $Q_1$ and 75% lie above.
+2.  **$50^{\text{th}}$ Percentile ($Q_2$ - Second Quartile / Median):** Divides the dataset in half. Exactly 50% of values lie below $Q_2$.
+3.  **$75^{\text{th}}$ Percentile ($Q_3$ - Third Quartile):** Marks the top 25% (or bottom 75%) of data. 75% of values lie below $Q_3$ and 25% lie above.
+
+> [!TIP]
+> The **Interquartile Range (IQR)** measures the spread of the middle 50% of data:
+> $$\text{IQR} = Q_3 - Q_1$$
+
+### B. Extreme / Tail Percentiles
+*   **$90^{\text{th}}$, $95^{\text{th}}$, and $99^{\text{th}}$ Percentiles:** Used to evaluate extreme values, system latency, SLA compliance, and rare tail events without getting distorted by maximum value single-off anomalies.
+
+---
+
+## 29. Why Percentiles Matter in AI/ML
+
+Percentiles play a critical role in data preprocessing, feature engineering, and model monitoring in Machine Learning:
+
+1.  **Robust Outlier Detection (The IQR Method):**
+    Outliers can severely distort ML models. The standard IQR rule identifies potential outliers as any data point ($X$) satisfying:
+    $$X < Q_1 - 1.5 \times \text{IQR} \quad \text{or} \quad X > Q_3 + 1.5 \times \text{IQR}$$
+
+2.  **Robust Feature Scaling (`RobustScaler`):**
+    Standardization ($\frac{x-\mu}{\sigma}$) and Min-Max scaling are vulnerable to extreme outliers. `RobustScaler` scales features using the median ($Q_2$) and IQR:
+    $$X_{\text{scaled}} = \frac{X - Q_2}{Q_3 - Q_1}$$
+    This ensures outliers do not compress the majority of inlier data points into a narrow range.
+
+3.  **Model Inference Latency & System Monitoring:**
+    Average latency (mean) can mask slow responses. ML Engineers track **P95** ($95^{\text{th}}$ percentile) and **P99** ($99^{\text{th}}$ percentile) latency to guarantee that 99% of users experience fast model prediction times.
+
+4.  **Data Drift Detection:**
+    By tracking shifts in $Q_1$, Median, and $Q_3$ of incoming production data over time, ML pipelines can detect distribution changes (data drift) before model accuracy degrades.
+
+5.  **Threshold Tuning in Classification:**
+    For imbalanced classification (e.g., fraud detection where only 1% of transactions are fraudulent), model prediction probability thresholds are often chosen using top percentiles (e.g., classifying top 1% probabilities as fraud).
+
+---
+
+## 30. Percentiles with NumPy
+
+NumPy provides two primary functions for computing percentiles and quantiles: `np.percentile()` (accepts 0–100) and `np.quantile()` (accepts 0.0–1.0).
+
+```python
