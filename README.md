@@ -593,3 +593,89 @@ The IQR forms the foundation of the **Box Plot (Box-and-Whisker Plot)**, which v
 ```
 
 ---
+
+## 33. Why IQR Matters for AI/ML
+
+In Data Science and Machine Learning, IQR is one of the most widely used metrics for data cleaning and preprocessing:
+
+1.  **Outlier Detection & Removal (1.5 × IQR Rule):**
+    Before training a model, extreme values must be identified. Data points outside the "fences" are flagged as outliers:
+    *   **Lower Fence:** $Q_1 - 1.5 \times \text{IQR}$
+    *   **Upper Fence:** $Q_3 + 1.5 \times \text{IQR}$
+    Any data point $X$ where $X < \text{Lower Fence}$ or $X > \text{Upper Fence}$ is an outlier that can be removed, capped (Winsorized), or investigated.
+
+2.  **Robust Feature Scaling (`RobustScaler`):**
+    When features contain extreme outliers, standard techniques like `StandardScaler` (Mean & Std) or `MinMaxScaler` fail because the mean and range get pulled by the outliers.
+    Scikit-Learn's **`RobustScaler`** uses the Median ($Q_2$) and IQR:
+    $$X_{\text{scaled}} = \frac{X - Q_2}{\text{IQR}}$$
+    This scales data based on percentiles, keeping inliers concentrated properly without being compressed by extreme values.
+
+3.  **Detecting Skewness & Asymmetry:**
+    Comparing $(Q_2 - Q_1)$ against $(Q_3 - Q_2)$ reveals the skewness of a feature:
+    *   If $(Q_3 - Q_2) > (Q_2 - Q_1) \rightarrow$ **Right-Skewed** (long right tail).
+    *   If $(Q_2 - Q_1) > (Q_3 - Q_2) \rightarrow$ **Left-Skewed** (long left tail).
+    *   If $(Q_3 - Q_2) \approx (Q_2 - Q_1) \rightarrow$ **Symmetric**.
+
+4.  **Production Data Monitoring (Covariate Shift):**
+    Tracking changes in IQR over time across production model features helps detect data drift. If a feature's IQR suddenly contracts or expands, the model's inputs have changed and retraining may be required.
+
+---
+
+## 34. Quartiles & IQR with Python
+
+We can easily compute Quartiles, IQR, and perform outlier filtering using Python with `numpy` and `scipy.stats`.
+
+```python
+import numpy as np
+from scipy import stats
+
+# Dataset with 12 values including 2 extreme outliers (5 and 150)
+data = [5, 42, 45, 48, 50, 52, 55, 58, 60, 62, 65, 150]
+
+# 1. Compute Quartiles (Q1, Q2/Median, Q3)
+q1, q2, q3 = np.percentile(data, [25, 50, 75])
+print(f"Q1 (25th percentile): {q1}")
+print(f"Q2 (Median):          {q2}")
+print(f"Q3 (75th percentile): {q3}")
+
+# 2. Compute Interquartile Range (IQR)
+iqr = q3 - q1
+# Alternatively using scipy: iqr = stats.iqr(data)
+print(f"IQR (Q3 - Q1):        {iqr}")
+
+# 3. Calculate Outlier Fences (1.5 * IQR Rule)
+lower_fence = q1 - 1.5 * iqr
+upper_fence = q3 + 1.5 * iqr
+print(f"Lower Fence:          {lower_fence}")
+print(f"Upper Fence:          {upper_fence}")
+
+# 4. Identify and filter outliers
+outliers = [x for x in data if x < lower_fence or x > upper_fence]
+clean_data = [x for x in data if lower_fence <= x <= upper_fence]
+
+print(f"Outliers detected:    {outliers}")      # Output: [5, 150]
+print(f"Cleaned dataset:      {clean_data}")    # Core 50% & valid inliers
+```
+
+---
+
+## 35. What is an Outlier?
+
+An **Outlier** is a data point that differs significantly from other observations in the same dataset. It is an extreme value that lies far outside the overall distribution pattern of the data.
+
+```
+ Normal Data Cluster:  [ 42, 45, 48, 50, 52, 55, 58, 60 ]
+ With Extreme Outlier: [ 42, 45, 48, 50, 52, 55, 58, 60 ] . . . . . . . [ 500 ]  <-- Outlier
+```
+
+### Common Causes of Outliers:
+1.  **Data Entry / Human Error:** Mistyping numbers (e.g., entering $1000$ instead of $10.0$).
+2.  **Measurement / Instrument Error:** Faulty sensor readings, network glitches, or equipment miscalibration.
+3.  **Sampling Errors:** Inadvertently including data points from a different population (e.g., mixing CEO salaries with entry-level worker salaries).
+4.  **Natural Extreme Variability:** Legitimate, real-world extreme values (e.g., net worth of billionaires, rare natural disasters, or high-value fraud transactions).
+
+---
+
+## 36. IQR Method for Detecting Outliers
+
+The **Interquartile Range (IQR) Method** (also known as Tukey's Fences) is the most popular non-parametric technique for identifying outliers because it does not assume a normal distribution.
