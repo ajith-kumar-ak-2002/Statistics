@@ -679,3 +679,110 @@ An **Outlier** is a data point that differs significantly from other observation
 ## 36. IQR Method for Detecting Outliers
 
 The **Interquartile Range (IQR) Method** (also known as Tukey's Fences) is the most popular non-parametric technique for identifying outliers because it does not assume a normal distribution.
+
+### The 1.5 × IQR Rule:
+To detect outliers, we construct upper and lower boundaries ("fences"):
+
+$$\text{Lower Fence} = Q_1 - 1.5 \times \text{IQR}$$
+$$\text{Upper Fence} = Q_3 + 1.5 \times \text{IQR}$$
+
+```
+   Outlier (< Lower Fence)             Valid Inliers             Outlier (> Upper Fence)
+  ◄─────────*───────────────|──────────[ Q1 │ Q2 │ Q3 ]──────────|───────────────*────────►
+                            ▲                                    ▲
+                       Lower Fence                          Upper Fence
+                      (Q1 - 1.5*IQR)                       (Q3 + 1.5*IQR)
+```
+
+*   **Rule:** Any data point $X$ is mathematically flagged as an **outlier** if:
+    $$X < \text{Lower Fence} \quad \text{or} \quad X > \text{Upper Fence}$$
+
+---
+
+## 37. Real-World Example of Outlier Detection
+
+Consider a sample of 10 home prices in a neighborhood (in thousands of dollars):
+
+$$\text{Prices} = [150, 160, 165, 170, 175, 180, 190, 200, 210, 950]$$
+
+### Step-by-Step Calculation:
+1.  **Find Quartiles:**
+    *   $Q_1 = 165$ ($25^{\text{th}}$ percentile)
+    *   $Q_3 = 200$ ($75^{\text{th}}$ percentile)
+2.  **Calculate IQR:**
+    *   $\text{IQR} = Q_3 - Q_1 = 200 - 165 = 35$
+3.  **Calculate Fences:**
+    *   $\text{Lower Fence} = 165 - (1.5 \times 35) = 165 - 52.5 = 112.5$
+    *   $\text{Upper Fence} = 200 + (1.5 \times 35) = 200 + 52.5 = 252.5$
+4.  **Identify Outliers:**
+    *   Check all values against $[112.5, 252.5]$.
+    *   The house priced at **\$950k** lies far above $252.5$, so it is flagged as an **outlier**.
+
+---
+
+## 38. Important: Outlier ≠ Error
+
+It is a critical mistake to assume that every outlier is a "bad" data point or an error that should immediately be deleted!
+
+> [!IMPORTANT]
+> **Not all outliers are errors.** Outliers belong to two distinct categories:
+
+| Category | Description | Action Required |
+| :--- | :--- | :--- |
+| **Data Errors** | Caused by mistyping, sensor failure, or corrupted data formats. | **Correct** or **Remove** them from the dataset. |
+| **Legitimate Extremes** | Real, valid observations representing rare events (e.g., fraudulent credit card transactions, rare disease cases, extreme market crashes). | **KEEP THEM!** These data points contain the crucial signals for anomaly and fraud detection models. |
+
+---
+
+## 39. Outliers in Machine Learning
+
+Outliers have a profound impact on machine learning algorithms:
+
+### A. Impact on Algorithms:
+*   **Highly Sensitive Models:** Linear Regression, Logistic Regression, K-Means Clustering, and Neural Networks use squared error metrics (like MSE). Outliers create massive loss values, pulling parameters far off target.
+*   **Robust Models:** Decision Trees, Random Forests, and Gradient Boosting (XGBoost/LightGBM) split data based on feature ranks/percentiles, making them naturally resistant to outliers.
+
+### B. Common Strategies to Handle Outliers in ML Pipelines:
+
+```
+                          OUTLIER HANDLING
+                                 │
+        ┌────────────────────────┼────────────────────────┐
+        ↓                        ↓                        ↓
+    Trimming                 Capping                 Transforming
+(Remove Outliers)          (Winsorization)         (Log/Box-Cox)
+```
+
+1.  **Trimming (Removal):** Deleting outlier rows when they are confirmed measurement errors.
+2.  **Capping / Winsorization:** Replacing extreme values outside the fences with the upper or lower fence values:
+    $$X_{\text{capped}} = \text{clip}(X, \text{Lower Fence}, \text{Upper Fence})$$
+3.  **Log Transformation:** Applying $\log(1 + X)$ compresses long right-skewed tails into a near-normal distribution.
+4.  **Robust Preprocessing:** Using `RobustScaler` (Median & IQR) instead of `StandardScaler` (Mean & Std).
+
+---
+
+## 40. Outlier Detection with Python
+
+Below is a complete Python script demonstrating how to detect outliers using the IQR method, visualize fence boundaries, and perform Winsorization (capping).
+
+```python
+import numpy as np
+
+data = np.array([10, 12, 13, 14, 15, 16, 18, 20, 22, 100])
+
+Q1 = np.percentile(data, 25)
+Q3 = np.percentile(data, 75)
+
+IQR = Q3 - Q1
+
+lower = Q1 - 1.5 * IQR
+upper = Q3 + 1.5 * IQR
+
+outliers = data[(data < lower) | (data > upper)]
+
+print("Q1:", Q1)
+print("Q3:", Q3)
+print("IQR:", IQR)
+print("Lower:", lower)
+print("Upper:", upper)
+print("Outliers:", outliers)
