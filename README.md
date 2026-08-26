@@ -518,3 +518,16 @@ print(f"Q1 (25th): {q1}, Q2 (50th): {q2}, Q3 (75th): {q3}")
 # Calculating Interquartile Range (IQR)
 iqr = q3 - q1
 print(f"IQR: {iqr}")
+
+# 3. Using np.quantile (uses fractions from 0.0 to 1.0)
+quantiles = np.quantile(scores, [0.25, 0.50, 0.75, 0.95])
+print(f"Quantiles (25%, 50%, 75%, 95%): {quantiles}")
+
+# 4. Specifying interpolation methods (NumPy default is 'linear')
+p90_nearest = np.percentile(scores, 90, method='nearest')
+p90_linear = np.percentile(scores, 90, method='linear')
+print(f"90th Percentile (Nearest): {p90_nearest}")
+print(f"90th Percentile (Linear): {p90_linear}")
+```
+
+---
