@@ -501,3 +501,20 @@ Percentiles play a critical role in data preprocessing, feature engineering, and
 NumPy provides two primary functions for computing percentiles and quantiles: `np.percentile()` (accepts 0–100) and `np.quantile()` (accepts 0.0–1.0).
 
 ```python
+
+import numpy as np
+
+# Sample dataset: exam scores of 10 students
+scores = [45, 55, 60, 65, 70, 78, 82, 88, 92, 98]
+
+# 1. Calculating a single percentile (e.g., 50th percentile = Median)
+p50 = np.percentile(scores, 50)
+print(f"50th Percentile (Median): {p50}")
+
+# 2. Calculating multiple percentiles at once (Quartiles: Q1, Q2, Q3)
+q1, q2, q3 = np.percentile(scores, [25, 50, 75])
+print(f"Q1 (25th): {q1}, Q2 (50th): {q2}, Q3 (75th): {q3}")
+
+# Calculating Interquartile Range (IQR)
+iqr = q3 - q1
+print(f"IQR: {iqr}")
